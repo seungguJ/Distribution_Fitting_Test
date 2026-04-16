@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 import yaml
@@ -33,12 +34,7 @@ def train_test_split(x_values: list[float], y_values: list[float], train_ratio: 
     )
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a tiny MLP regressor.")
-    parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
-    args = parser.parse_args()
-
-    config = load_config(Path(args.config))
+def run_experiment(config: dict, output_root: Path) -> dict:
     samples = generate_dataset(config)
     x_values, cdf_values, _counts = build_empirical_cdf(samples, config["N"])
     normalized_x = normalize_x(x_values, config["N"])
@@ -70,18 +66,29 @@ def main() -> None:
         "monotonic_violations": monotonic_violations(predicted_all),
     }
 
-    output_root = Path("outputs")
     save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
     save_samples_csv(output_root / "data" / "latest_samples.csv", samples)
     save_cdf_csv(output_root / "data" / "latest_cdf.csv", x_values, cdf_values, predicted_all)
-    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", x_values, cdf_values, predicted_all)
+    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", x_values, cdf_values, predicted_all, metrics["sample_summary"])
+    return metrics
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a tiny MLP regressor.")
+    parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
+    parser.add_argument("--output-root", default="outputs", help="directory for metrics, data, and plots")
+    args = parser.parse_args()
+
+    config = load_config(Path(args.config))
+    output_root = Path(args.output_root)
+    metrics = run_experiment(config, output_root)
 
     print("Run complete")
     print(f"sample mean={metrics['sample_summary']['mean']:.4f}, sample variance={metrics['sample_summary']['variance']:.4f}")
     print(f"full mse={metrics['full_mse']:.6f}, full mae={metrics['full_mae']:.6f}, full r2={metrics['full_r2']:.6f}")
     print(f"test mse={metrics['test_mse']:.6f}, test mae={metrics['test_mae']:.6f}, test r2={metrics['test_r2']:.6f}")
     print(f"monotonic violations={metrics['monotonic_violations']}")
-    print("outputs written to outputs/")
+    print(f"outputs written to {output_root}/")
 
 
 if __name__ == "__main__":

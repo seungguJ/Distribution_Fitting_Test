@@ -1,0 +1,31 @@
+{
+  "config": {
+    "N": 100,
+    "sample_size": 5000,
+    "seed": 143,
+    "train_ratio": 0.8,
+    "hidden_size": 12,
+    "epochs": 3000,
+    "learning_rate": 0.08,
+    "mean": 50,
+    "variance": 200,
+    "distribution_mode": "high_biased"
+  },
+  "sample_summary": {
+    "size": 5000,
+    "min": 1,
+    "max": 100,
+    "mean": 61.999,
+    "variance": 570.3497990000001
+  },
+  "train_points": 80,
+  "test_points": 21,
+  "train_final_loss": 1.926154222519484e-06,
+  "full_mse": 6.024698289066631e-06,
+  "full_mae": 0.0017553262530157583,
+  "full_r2": 0.999940948887798,
+  "test_mse": 1.916753346876729e-05,
+  "test_mae": 0.003259287668448825,
+  "test_r2": 0.9973578523983437,
+  "monotonic_violations": 0
+}
