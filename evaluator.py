@@ -23,6 +23,10 @@ def mae(y_true: list[float], y_pred: list[float]) -> float:
     return sum(abs(true - pred) for true, pred in zip(y_true, y_pred)) / len(y_true)
 
 
+def rmse(y_true: list[float], y_pred: list[float]) -> float:
+    return math.sqrt(mse(y_true, y_pred))
+
+
 def r2_score(y_true: list[float], y_pred: list[float]) -> float:
     baseline = mean(y_true)
     total = sum((value - baseline) ** 2 for value in y_true)

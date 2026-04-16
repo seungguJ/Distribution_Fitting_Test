@@ -7,7 +7,7 @@ import yaml
 
 from cdf_builder import build_empirical_cdf
 from data_generator import generate_dataset
-from evaluator import build_plot_filename, mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
+from evaluator import build_plot_filename, mae, monotonic_violations, mse, r2_score, rmse, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
 from model import TorchCDFRegressor, fit_model, predict_model
 
 
@@ -60,9 +60,11 @@ def run_experiment(config: dict, output_root: Path) -> dict:
         "test_points": len(x_test),
         "train_final_loss": losses[-1],
         "full_mse": mse(cdf_values, predicted_all),
+        "full_rmse": rmse(cdf_values, predicted_all),
         "full_mae": mae(cdf_values, predicted_all),
         "full_r2": r2_score(cdf_values, predicted_all),
         "test_mse": mse(y_test, predicted_test) if y_test else None,
+        "test_rmse": rmse(y_test, predicted_test) if y_test else None,
         "test_mae": mae(y_test, predicted_test) if y_test else None,
         "test_r2": r2_score(y_test, predicted_test) if y_test else None,
         "monotonic_violations": monotonic_violations(predicted_all),
@@ -96,8 +98,8 @@ def main() -> None:
     print("Run complete")
     print(f"model={metrics['model_name']}, parameter_count={metrics['model_parameter_count']}")
     print(f"sample mean={metrics['sample_summary']['mean']:.4f}, sample variance={metrics['sample_summary']['variance']:.4f}")
-    print(f"full mse={metrics['full_mse']:.6f}, full mae={metrics['full_mae']:.6f}, full r2={metrics['full_r2']:.6f}")
-    print(f"test mse={metrics['test_mse']:.6f}, test mae={metrics['test_mae']:.6f}, test r2={metrics['test_r2']:.6f}")
+    print(f"full mse={metrics['full_mse']:.6f}, full rmse={metrics['full_rmse']:.6f}, full mae={metrics['full_mae']:.6f}, full r2={metrics['full_r2']:.6f}")
+    print(f"test mse={metrics['test_mse']:.6f}, test rmse={metrics['test_rmse']:.6f}, test mae={metrics['test_mae']:.6f}, test r2={metrics['test_r2']:.6f}")
     print(f"monotonic violations={metrics['monotonic_violations']}")
     print(f"outputs written to {output_root}/")
 
