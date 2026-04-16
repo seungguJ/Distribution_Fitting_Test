@@ -74,6 +74,15 @@ def save_cdf_csv(path: Path, x_values: list[int], cdf_values: list[float], predi
             writer.writerow([x_value, actual, predicted])
 
 
+def build_plot_filename(config: dict, sample_summary: dict) -> str:
+    mean_value = f"{sample_summary['mean']:.2f}".replace(".", "p")
+    variance_value = f"{sample_summary['variance']:.2f}".replace(".", "p")
+    return (
+        f"cdf_N{config['N']}_mean{mean_value}_var{variance_value}"
+        f"_max{sample_summary['max']}_size{sample_summary['size']}.svg"
+    )
+
+
 def save_cdf_plot(path: Path, x_values: list[int], actual: list[float], predicted: list[float], sample_summary: dict) -> None:
     width = 980
     height = 620

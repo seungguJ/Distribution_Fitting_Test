@@ -1,0 +1,34 @@
+{
+  "config": {
+    "N": 10000,
+    "sample_size": 100000,
+    "mean": 300,
+    "variance": 20000,
+    "seed": 42,
+    "distribution_mode": "lognormal",
+    "train_ratio": 0.8,
+    "hidden_size": 32,
+    "epochs": 250,
+    "learning_rate": 0.06
+  },
+  "model_name": "MonotonicCDFRegressor",
+  "model_parameter_count": 96,
+  "sample_summary": {
+    "size": 100000,
+    "min": 46,
+    "max": 1576,
+    "mean": 300.03628,
+    "variance": 19828.2930837616
+  },
+  "train_points": 8000,
+  "test_points": 2001,
+  "train_final_loss": 0.007135751177949682,
+  "full_mse": 0.008470324452295704,
+  "full_mae": 0.024193622294363323,
+  "full_r2": 0.608704709899553,
+  "test_mse": 1.0540679089506251e-07,
+  "test_mae": 0.00032459583911147665,
+  "test_r2": 1.0,
+  "monotonic_violations": 0,
+  "named_plot_path": "outputs/scale_10000_100000/plots/cdf_N10000_mean300p04_var19828p29_max1576_size100000.svg"
+}

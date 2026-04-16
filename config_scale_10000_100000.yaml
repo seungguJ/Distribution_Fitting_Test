@@ -1,0 +1,10 @@
+N: 10000
+sample_size: 100000
+mean: 300
+variance: 20000
+seed: 42
+distribution_mode: lognormal
+train_ratio: 0.8
+hidden_size: 32
+epochs: 250
+learning_rate: 0.06

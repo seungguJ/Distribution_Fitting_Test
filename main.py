@@ -8,7 +8,7 @@ import yaml
 
 from cdf_builder import build_empirical_cdf
 from data_generator import generate_dataset
-from evaluator import mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
+from evaluator import build_plot_filename, mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
 from model import MonotonicCDFRegressor
 
 
@@ -68,10 +68,14 @@ def run_experiment(config: dict, output_root: Path) -> dict:
         "monotonic_violations": monotonic_violations(predicted_all),
     }
 
+    named_plot_path = output_root / "plots" / build_plot_filename(config, metrics["sample_summary"])
     save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
     save_samples_csv(output_root / "data" / "latest_samples.csv", samples)
     save_cdf_csv(output_root / "data" / "latest_cdf.csv", x_values, cdf_values, predicted_all)
     save_cdf_plot(output_root / "plots" / "latest_cdf.svg", x_values, cdf_values, predicted_all, metrics["sample_summary"])
+    save_cdf_plot(named_plot_path, x_values, cdf_values, predicted_all, metrics["sample_summary"])
+    metrics["named_plot_path"] = str(named_plot_path)
+    save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
     return metrics
 
 
