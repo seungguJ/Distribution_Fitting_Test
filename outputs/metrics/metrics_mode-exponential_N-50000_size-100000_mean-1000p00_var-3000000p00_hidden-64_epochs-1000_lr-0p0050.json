@@ -1,0 +1,40 @@
+{
+  "config": {
+    "N": 50000,
+    "sample_size": 100000,
+    "mean": 1000,
+    "variance": 3000000,
+    "seed": 42,
+    "distribution_mode": "exponential",
+    "train_ratio": 0.8,
+    "hidden_size": 64,
+    "epochs": 1000,
+    "learning_rate": 0.005
+  },
+  "model_name": "TorchCDFRegressorReLU",
+  "model_parameter_count": 8705,
+  "sample_summary": {
+    "size": 100000,
+    "min": 0,
+    "max": 13047,
+    "mean": 1001.48967,
+    "median": 694.0,
+    "variance": 1004121.8973932911
+  },
+  "train_points": 40000,
+  "test_points": 10001,
+  "train_final_loss": 4.749450965846336e-07,
+  "full_mse": 4.7101144819053614e-07,
+  "full_rmse": 0.0006863027380030886,
+  "full_mae": 0.0003148558468003401,
+  "full_r2": 0.9999509590431032,
+  "test_mse": 4.580606263086846e-07,
+  "test_rmse": 0.0006768017629326068,
+  "test_mae": 0.00031201444426982774,
+  "test_r2": 0.9999476135648641,
+  "monotonic_violations": 0,
+  "named_metrics_path": "outputs/metrics/metrics_mode-exponential_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.json",
+  "named_samples_path": "outputs/data/samples_mode-exponential_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.csv",
+  "named_cdf_path": "outputs/data/cdf_mode-exponential_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.csv",
+  "named_plot_path": "outputs/plots/cdf_mode-exponential_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.svg"
+}

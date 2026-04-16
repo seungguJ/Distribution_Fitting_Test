@@ -1,0 +1,40 @@
+{
+  "config": {
+    "N": 50000,
+    "sample_size": 100000,
+    "mean": 1000,
+    "variance": 3000000,
+    "seed": 42,
+    "distribution_mode": "gamma",
+    "train_ratio": 0.8,
+    "hidden_size": 64,
+    "epochs": 1000,
+    "learning_rate": 0.005
+  },
+  "model_name": "TorchCDFRegressorReLU",
+  "model_parameter_count": 8705,
+  "sample_summary": {
+    "size": 100000,
+    "min": 0,
+    "max": 35499,
+    "mean": 1004.38673,
+    "median": 287.0,
+    "variance": 3058980.8342699073
+  },
+  "train_points": 40000,
+  "test_points": 10001,
+  "train_final_loss": 8.299037972392398e-07,
+  "full_mse": 7.1500571345789e-07,
+  "full_rmse": 0.0008455801046961134,
+  "full_mae": 0.00016374713262418082,
+  "full_r2": 0.9998660080349003,
+  "test_mse": 2.591201143514491e-07,
+  "test_rmse": 0.0005090384212919975,
+  "test_mae": 0.00015577000116016995,
+  "test_r2": 0.9999468251599216,
+  "monotonic_violations": 0,
+  "named_metrics_path": "outputs/metrics/metrics_mode-gamma_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.json",
+  "named_samples_path": "outputs/data/samples_mode-gamma_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.csv",
+  "named_cdf_path": "outputs/data/cdf_mode-gamma_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.csv",
+  "named_plot_path": "outputs/plots/cdf_mode-gamma_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-1000_lr-0p0050.svg"
+}
