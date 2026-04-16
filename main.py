@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import random
 from pathlib import Path
 
 import yaml
@@ -23,14 +24,32 @@ def normalize_x(x_values: list[int], max_value: int) -> list[float]:
     return [value / max_value for value in x_values]
 
 
-def train_test_split(x_values: list[float], y_values: list[float], train_ratio: float) -> tuple[list[float], list[float], list[float], list[float]]:
-    split_index = max(1, min(len(x_values) - 1, int(len(x_values) * train_ratio)))
-    return (
-        x_values[:split_index],
-        x_values[split_index:],
-        y_values[:split_index],
-        y_values[split_index:],
-    )
+def train_test_split(
+    x_values: list[float],
+    y_values: list[float],
+    train_ratio: float,
+    seed: int,
+) -> tuple[list[float], list[float], list[float], list[float]]:
+    total_points = len(x_values)
+    train_size = max(1, min(total_points - 1, int(total_points * train_ratio)))
+    indices = list(range(total_points))
+    rng = random.Random(seed)
+    rng.shuffle(indices)
+    train_indices = set(indices[:train_size])
+
+    x_train: list[float] = []
+    y_train: list[float] = []
+    x_test: list[float] = []
+    y_test: list[float] = []
+
+    for index, (x_value, y_value) in enumerate(zip(x_values, y_values)):
+        if index in train_indices:
+            x_train.append(x_value)
+            y_train.append(y_value)
+        else:
+            x_test.append(x_value)
+            y_test.append(y_value)
+    return x_train, x_test, y_train, y_test
 
 
 def run_experiment(config: dict, output_root: Path) -> dict:
@@ -38,7 +57,12 @@ def run_experiment(config: dict, output_root: Path) -> dict:
     x_values, cdf_values, _counts = build_empirical_cdf(samples, config["N"])
     normalized_x = normalize_x(x_values, config["N"])
 
-    x_train, x_test, y_train, y_test = train_test_split(normalized_x, cdf_values, config["train_ratio"])
+    x_train, x_test, y_train, y_test = train_test_split(
+        normalized_x,
+        cdf_values,
+        config["train_ratio"],
+        config["seed"],
+    )
     model = TorchCDFRegressor(hidden_size=config["hidden_size"], seed=config["seed"])
     losses = fit_model(
         model=model,
