@@ -17,7 +17,7 @@
 1. `config.yaml`에서 `N`, `sample_size`, `mean`, `variance` 등을 설정
 2. 설정에 따라 `0..N` 범위의 랜덤 데이터를 생성
 3. 생성된 데이터로 경험적 CDF를 계산
-4. 간단한 1-hidden-layer MLP 회귀 모델을 학습
+4. 단조 증가와 `0..1` 출력이 보장되는 작은 회귀 모델을 학습
 5. 실제 CDF와 예측 CDF를 비교하고 결과를 저장
 
 ## Config 예시
@@ -46,9 +46,23 @@ learning_rate: 0.08
 | `seed` | 재현 가능한 실험용 시드 |
 | `distribution_mode` | `lognormal`, `mixed`, `low_biased`, `high_biased`, `wide_spread`, `edge_focused`, `noisy_random` |
 | `train_ratio` | CDF 포인트 학습 비율 |
-| `hidden_size` | 작은 MLP 은닉층 크기 |
+| `hidden_size` | 단조 CDF 모델의 sigmoid basis 개수 |
 | `epochs` | 학습 반복 수 |
 | `learning_rate` | SGD 학습률 |
+
+현재 예측기는 일반 MLP가 아니라 다음 형태입니다.
+
+- 여러 개의 sigmoid basis를 사용
+- 각 basis의 가중치는 `softmax`로 정규화되어 항상 양수이고 합이 1
+- 각 basis의 기울기는 `softplus`를 통해 항상 양수
+- 따라서 전체 출력은 항상 단조 증가
+- sigmoid 가중합이므로 출력은 항상 `0..1` 범위
+
+파라미터 수는 `3 * hidden_size` 입니다.
+
+- basis weight raw parameter: `hidden_size`
+- slope raw parameter: `hidden_size`
+- horizontal shift parameter: `hidden_size`
 
 ## 분포 모드
 

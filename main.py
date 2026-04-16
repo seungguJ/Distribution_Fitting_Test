@@ -9,7 +9,7 @@ import yaml
 from cdf_builder import build_empirical_cdf
 from data_generator import generate_dataset
 from evaluator import mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
-from model import SimpleMLPRegressor
+from model import MonotonicCDFRegressor
 
 
 def load_config(path: Path) -> dict:
@@ -40,7 +40,7 @@ def run_experiment(config: dict, output_root: Path) -> dict:
     normalized_x = normalize_x(x_values, config["N"])
 
     x_train, x_test, y_train, y_test = train_test_split(normalized_x, cdf_values, config["train_ratio"])
-    model = SimpleMLPRegressor(
+    model = MonotonicCDFRegressor(
         hidden_size=config["hidden_size"],
         learning_rate=config["learning_rate"],
         epochs=config["epochs"],
@@ -53,6 +53,8 @@ def run_experiment(config: dict, output_root: Path) -> dict:
 
     metrics = {
         "config": config,
+        "model_name": model.model_name,
+        "model_parameter_count": model.parameter_count,
         "sample_summary": summarize_samples(samples),
         "train_points": len(x_train),
         "test_points": len(x_test),
@@ -84,6 +86,7 @@ def main() -> None:
     metrics = run_experiment(config, output_root)
 
     print("Run complete")
+    print(f"model={metrics['model_name']}, parameter_count={metrics['model_parameter_count']}")
     print(f"sample mean={metrics['sample_summary']['mean']:.4f}, sample variance={metrics['sample_summary']['variance']:.4f}")
     print(f"full mse={metrics['full_mse']:.6f}, full mae={metrics['full_mae']:.6f}, full r2={metrics['full_r2']:.6f}")
     print(f"test mse={metrics['test_mse']:.6f}, test mae={metrics['test_mae']:.6f}, test r2={metrics['test_r2']:.6f}")
