@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import statistics
 from pathlib import Path
 
 
@@ -47,6 +48,7 @@ def summarize_samples(samples: list[int]) -> dict:
         "min": min(samples),
         "max": max(samples),
         "mean": sample_mean,
+        "median": statistics.median(samples),
         "variance": sample_variance,
     }
 
@@ -122,6 +124,7 @@ def save_cdf_plot(path: Path, x_values: list[int], actual: list[float], predicte
     )
     schema_lines = [
         f"mean: {sample_summary['mean']:.4f}",
+        f"median: {sample_summary['median']:.4f}",
         f"variance: {sample_summary['variance']:.4f}",
         f"min: {sample_summary['min']}",
         f"max: {sample_summary['max']}",

@@ -68,12 +68,16 @@ def run_experiment(config: dict, output_root: Path) -> dict:
         "monotonic_violations": monotonic_violations(predicted_all),
     }
 
+    plot_limit = metrics["sample_summary"]["max"]
+    plot_x_values = x_values[: plot_limit + 1]
+    plot_actual = cdf_values[: plot_limit + 1]
+    plot_predicted = predicted_all[: plot_limit + 1]
     named_plot_path = output_root / "plots" / build_plot_filename(config, metrics["sample_summary"])
     save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
     save_samples_csv(output_root / "data" / "latest_samples.csv", samples)
     save_cdf_csv(output_root / "data" / "latest_cdf.csv", x_values, cdf_values, predicted_all)
-    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", x_values, cdf_values, predicted_all, metrics["sample_summary"])
-    save_cdf_plot(named_plot_path, x_values, cdf_values, predicted_all, metrics["sample_summary"])
+    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", plot_x_values, plot_actual, plot_predicted, metrics["sample_summary"])
+    save_cdf_plot(named_plot_path, plot_x_values, plot_actual, plot_predicted, metrics["sample_summary"])
     metrics["named_plot_path"] = str(named_plot_path)
     save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
     return metrics

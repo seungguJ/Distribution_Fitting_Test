@@ -1,0 +1,35 @@
+{
+  "config": {
+    "N": 10000,
+    "sample_size": 100001,
+    "mean": 500,
+    "variance": 1,
+    "seed": 42,
+    "distribution_mode": "outlier_high_median",
+    "train_ratio": 0.8,
+    "hidden_size": 32,
+    "epochs": 500,
+    "learning_rate": 0.03
+  },
+  "model_name": "TorchCDFRegressor",
+  "model_parameter_count": 1153,
+  "sample_summary": {
+    "size": 100001,
+    "min": 0,
+    "max": 10000,
+    "mean": 500.0949990500095,
+    "median": 1000,
+    "variance": 250899.9819752705
+  },
+  "train_points": 8000,
+  "test_points": 2001,
+  "train_final_loss": 0.008295661769807339,
+  "full_mse": 0.006635859331551012,
+  "full_mae": 0.02898236934569305,
+  "full_r2": 0.7050408050362333,
+  "test_mse": 9.757926640646436e-11,
+  "test_mae": 9.875812409834493e-06,
+  "test_r2": -1952.5764723184523,
+  "monotonic_violations": 0,
+  "named_plot_path": "outputs/torch_outlier_10000/plots/cdf_N10000_mean500p09_var250899p98_max10000_size100001.svg"
+}

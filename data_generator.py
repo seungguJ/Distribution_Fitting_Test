@@ -72,6 +72,10 @@ def _mixed(rng: random.Random, cfg: GeneratorConfig) -> int:
     return generator(rng, cfg)
 
 
+def _outlier_high_median(_rng: random.Random, cfg: GeneratorConfig) -> int:
+    raise RuntimeError("outlier_high_median is generated as a full dataset and should not be sampled one-by-one")
+
+
 MODE_TO_GENERATOR = {
     "lognormal": _lognormal,
     "low_biased": _low_biased,
@@ -80,6 +84,7 @@ MODE_TO_GENERATOR = {
     "edge_focused": _edge_focused,
     "noisy_random": _noisy_random,
     "mixed": _mixed,
+    "outlier_high_median": _outlier_high_median,
 }
 
 
@@ -100,5 +105,16 @@ def generate_dataset(config: dict) -> list[int]:
         raise ValueError(f"unsupported distribution_mode: {cfg.distribution_mode}")
 
     rng = random.Random(cfg.seed)
+    if cfg.distribution_mode == "outlier_high_median":
+        if cfg.sample_size < 3 or cfg.sample_size % 2 == 0:
+            raise ValueError("outlier_high_median requires an odd sample_size of at least 3")
+        lower_count = cfg.sample_size // 2
+        upper_count = cfg.sample_size - lower_count - 1
+        lower_values = [0 for _ in range(lower_count)]
+        central_values = [1000 for _ in range(upper_count)]
+        outlier_value = cfg.N
+        dataset = lower_values + central_values + [outlier_value]
+        rng.shuffle(dataset)
+        return dataset
     generator = MODE_TO_GENERATOR[cfg.distribution_mode]
     return [generator(rng, cfg) for _ in range(cfg.sample_size)]

@@ -1,0 +1,10 @@
+N: 10000
+sample_size: 100001
+mean: 500
+variance: 1
+seed: 42
+distribution_mode: outlier_high_median
+train_ratio: 0.8
+hidden_size: 32
+epochs: 500
+learning_rate: 0.03
