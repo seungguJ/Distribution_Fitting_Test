@@ -2,7 +2,7 @@
   "config": {
     "N": 100,
     "sample_size": 5000,
-    "seed": 142,
+    "seed": 242,
     "train_ratio": 0.8,
     "hidden_size": 12,
     "epochs": 3000,
@@ -13,19 +13,19 @@
   },
   "sample_summary": {
     "size": 5000,
-    "min": 26,
+    "min": 13,
     "max": 100,
-    "mean": 83.6534,
-    "variance": 163.83086844
+    "mean": 83.7418,
+    "variance": 169.26433276
   },
   "train_points": 80,
   "test_points": 21,
-  "train_final_loss": 6.600656450271382e-05,
-  "full_mse": 0.006216957439622599,
-  "full_mae": 0.039787391000980755,
-  "full_r2": 0.915487260616444,
-  "test_mse": 0.028386396768516852,
-  "test_mae": 0.13793759168252454,
-  "test_r2": 0.3737569375875833,
-  "monotonic_violations": 16
+  "train_final_loss": 9.75283877068925e-06,
+  "full_mse": 0.005434293800606135,
+  "full_mae": 0.03386106441477043,
+  "full_r2": 0.924844804790538,
+  "test_mse": 0.025674016696943167,
+  "test_mae": 0.1287154002187812,
+  "test_r2": 0.4396217489948441,
+  "monotonic_violations": 14
 }

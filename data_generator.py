@@ -23,6 +23,16 @@ def _bounded_gauss(rng: random.Random, mean: float, stddev: float, upper: int) -
     return _clip_int(rng.gauss(mean, stddev), upper)
 
 
+def _lognormal(rng: random.Random, cfg: GeneratorConfig) -> int:
+    bounded_mean = min(max(cfg.mean, 1.0), cfg.N)
+    bounded_variance = max(cfg.variance, 1.0)
+    sigma_squared = math.log(1.0 + (bounded_variance / (bounded_mean * bounded_mean)))
+    sigma = math.sqrt(sigma_squared)
+    mu = math.log(bounded_mean) - (sigma_squared / 2.0)
+    raw_value = rng.lognormvariate(mu, sigma)
+    return _clip_int(raw_value, cfg.N)
+
+
 def _low_biased(rng: random.Random, cfg: GeneratorConfig) -> int:
     alpha = max(1.2, (cfg.mean + 1) / max(cfg.N - cfg.mean, 1))
     beta = max(2.0, cfg.N / max(cfg.mean + 1, 1))
@@ -57,12 +67,13 @@ def _noisy_random(rng: random.Random, cfg: GeneratorConfig) -> int:
 
 
 def _mixed(rng: random.Random, cfg: GeneratorConfig) -> int:
-    modes = (_low_biased, _high_biased, _wide_spread, _edge_focused, _noisy_random)
+    modes = (_lognormal, _low_biased, _high_biased, _wide_spread, _edge_focused, _noisy_random)
     generator = rng.choice(modes)
     return generator(rng, cfg)
 
 
 MODE_TO_GENERATOR = {
+    "lognormal": _lognormal,
     "low_biased": _low_biased,
     "high_biased": _high_biased,
     "wide_spread": _wide_spread,

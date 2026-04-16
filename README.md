@@ -44,7 +44,7 @@ learning_rate: 0.08
 | `mean` | 분포 중심 조절값 |
 | `variance` | 분포 퍼짐 조절값 |
 | `seed` | 재현 가능한 실험용 시드 |
-| `distribution_mode` | `mixed`, `low_biased`, `high_biased`, `wide_spread`, `edge_focused`, `noisy_random` |
+| `distribution_mode` | `lognormal`, `mixed`, `low_biased`, `high_biased`, `wide_spread`, `edge_focused`, `noisy_random` |
 | `train_ratio` | CDF 포인트 학습 비율 |
 | `hidden_size` | 작은 MLP 은닉층 크기 |
 | `epochs` | 학습 반복 수 |
@@ -52,6 +52,7 @@ learning_rate: 0.08
 
 ## 분포 모드
 
+- `lognormal`: 오른쪽 꼬리가 긴 로그노말 형태. CDF가 강한 곡선 형태를 띔
 - `low_biased`: 낮은 값 주변에 상대적으로 몰림
 - `high_biased`: 높은 값 주변에 상대적으로 몰림
 - `wide_spread`: 넓게 퍼지도록 생성

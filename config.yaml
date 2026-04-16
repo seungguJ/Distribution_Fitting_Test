@@ -3,7 +3,7 @@ sample_size: 5000
 mean: 30
 variance: 200
 seed: 42
-distribution_mode: mixed
+distribution_mode: lognormal
 train_ratio: 0.8
 hidden_size: 12
 epochs: 4000

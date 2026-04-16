@@ -2,7 +2,7 @@
   "config": {
     "N": 100,
     "sample_size": 5000,
-    "seed": 344,
+    "seed": 444,
     "train_ratio": 0.8,
     "hidden_size": 12,
     "epochs": 3000,
@@ -15,17 +15,17 @@
     "size": 5000,
     "min": 0,
     "max": 100,
-    "mean": 60.9188,
-    "variance": 1102.40460656
+    "mean": 59.8032,
+    "variance": 1124.95166976
   },
   "train_points": 80,
   "test_points": 21,
-  "train_final_loss": 0.0002919163842806848,
-  "full_mse": 0.00922569668813392,
-  "full_mae": 0.05404053530418111,
-  "full_r2": 0.8356227392528882,
-  "test_mse": 0.04065046121208255,
-  "test_mae": 0.16202324897939607,
-  "test_r2": -2.272868645036199,
-  "monotonic_violations": 21
+  "train_final_loss": 0.000269327190423802,
+  "full_mse": 0.01037111728625964,
+  "full_mae": 0.05390143118868475,
+  "full_r2": 0.8157911487903342,
+  "test_mse": 0.04755354299864955,
+  "test_mae": 0.1795839225663968,
+  "test_r2": -2.9247711885086765,
+  "monotonic_violations": 27
 }

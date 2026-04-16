@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620">
+<rect width="100%" height="100%" fill="#fffaf0" />
+<text x="490.0" y="28" font-size="22" text-anchor="middle" fill="#1d1d1d">Empirical CDF Scatter vs ML Approximation Line</text>
+<text x="490.0" y="48" font-size="13" text-anchor="middle" fill="#5f584d">Scatter points show actual empirical CDF, red line shows ML approximation</text>
+<g><line x1="70" y1="550.00" x2="940" y2="550.00" stroke="#e6e1d7" stroke-width="1" /><text x="60" y="555.00" font-size="12" text-anchor="end">0.0</text></g>
+<g><line x1="70" y1="427.50" x2="940" y2="427.50" stroke="#e6e1d7" stroke-width="1" /><text x="60" y="432.50" font-size="12" text-anchor="end">0.2</text></g>
+<g><line x1="70" y1="305.00" x2="940" y2="305.00" stroke="#e6e1d7" stroke-width="1" /><text x="60" y="310.00" font-size="12" text-anchor="end">0.5</text></g>
+<g><line x1="70" y1="182.50" x2="940" y2="182.50" stroke="#e6e1d7" stroke-width="1" /><text x="60" y="187.50" font-size="12" text-anchor="end">0.8</text></g>
+<g><line x1="70" y1="60.00" x2="940" y2="60.00" stroke="#e6e1d7" stroke-width="1" /><text x="60" y="65.00" font-size="12" text-anchor="end">1.0</text></g>
+<g><line x1="70.00" y1="60" x2="70.00" y2="550" stroke="#f0ece3" stroke-width="1" /><text x="70.00" y="600" font-size="12" text-anchor="middle">0</text></g>
+<g><line x1="287.50" y1="60" x2="287.50" y2="550" stroke="#f0ece3" stroke-width="1" /><text x="287.50" y="600" font-size="12" text-anchor="middle">25</text></g>
+<g><line x1="505.00" y1="60" x2="505.00" y2="550" stroke="#f0ece3" stroke-width="1" /><text x="505.00" y="600" font-size="12" text-anchor="middle">50</text></g>
+<g><line x1="722.50" y1="60" x2="722.50" y2="550" stroke="#f0ece3" stroke-width="1" /><text x="722.50" y="600" font-size="12" text-anchor="middle">75</text></g>
+<g><line x1="940.00" y1="60" x2="940.00" y2="550" stroke="#f0ece3" stroke-width="1" /><text x="940.00" y="600" font-size="12" text-anchor="middle">100</text></g>
+<line x1="70" y1="60" x2="70" y2="550" stroke="#444" stroke-width="1.5" />
+<line x1="70" y1="550" x2="940" y2="550" stroke="#444" stroke-width="1.5" />
+<circle cx="70.00" cy="550.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="78.70" cy="550.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="87.40" cy="550.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="96.10" cy="550.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="104.80" cy="549.12" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="113.50" cy="543.83" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="122.20" cy="533.93" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="130.90" cy="516.78" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="139.60" cy="493.55" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="148.30" cy="462.29" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="157.00" cy="427.60" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="165.70" cy="390.46" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="174.40" cy="352.04" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="183.10" cy="314.70" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="191.80" cy="281.19" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="200.50" cy="252.08" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="209.20" cy="221.31" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="217.90" cy="196.71" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="226.60" cy="174.27" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="235.30" cy="156.33" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="244.00" cy="141.24" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="252.70" cy="127.72" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="261.40" cy="116.84" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="270.10" cy="107.24" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="278.80" cy="99.69" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="287.50" cy="92.73" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="296.20" cy="87.93" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="304.90" cy="84.21" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="313.60" cy="78.72" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="322.30" cy="75.78" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="331.00" cy="73.52" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="339.70" cy="70.98" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="348.40" cy="69.11" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="357.10" cy="67.35" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="365.80" cy="66.66" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="374.50" cy="64.70" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="383.20" cy="63.53" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="391.90" cy="62.94" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="400.60" cy="62.45" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="409.30" cy="61.96" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="418.00" cy="61.86" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="426.70" cy="61.37" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="435.40" cy="61.27" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="444.10" cy="61.08" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="452.80" cy="60.98" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="461.50" cy="60.88" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="470.20" cy="60.88" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="478.90" cy="60.88" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="487.60" cy="60.78" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="496.30" cy="60.59" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="505.00" cy="60.49" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="513.70" cy="60.49" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="522.40" cy="60.39" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="531.10" cy="60.20" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="539.80" cy="60.20" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="548.50" cy="60.20" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="557.20" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="565.90" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="574.60" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="583.30" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="592.00" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="600.70" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="609.40" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="618.10" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="626.80" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="635.50" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="644.20" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="652.90" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="661.60" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="670.30" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="679.00" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="687.70" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="696.40" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="705.10" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="713.80" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="722.50" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="731.20" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="739.90" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="748.60" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="757.30" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="766.00" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="774.70" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="783.40" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="792.10" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="800.80" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="809.50" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="818.20" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="826.90" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="835.60" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="844.30" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="853.00" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="861.70" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="870.40" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="879.10" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="887.80" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="896.50" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="905.20" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="913.90" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="922.60" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="931.30" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<circle cx="940.00" cy="60.00" r="3.2" fill="#1f77b4" fill-opacity="0.75" />
+<polyline fill="none" stroke="#d62728" stroke-width="3" points="70.00,550.00 78.70,550.00 87.40,550.00 96.10,550.00 104.80,532.73 113.50,502.52 122.20,473.25 130.90,444.94 139.60,417.64 148.30,391.38 157.00,366.17 165.70,342.04 174.40,318.99 183.10,297.04 191.80,276.20 200.50,256.45 209.20,237.79 217.90,220.22 226.60,203.71 235.30,188.26 244.00,173.84 252.70,160.43 261.40,147.99 270.10,136.51 278.80,125.95 287.50,116.27 296.20,107.45 304.90,99.43 313.60,92.20 322.30,85.70 331.00,79.90 339.70,74.77 348.40,70.25 357.10,66.31 365.80,62.92 374.50,60.03 383.20,60.00 391.90,60.00 400.60,60.00 409.30,60.00 418.00,60.00 426.70,60.00 435.40,60.00 444.10,60.00 452.80,60.00 461.50,60.00 470.20,60.00 478.90,60.00 487.60,60.00 496.30,60.00 505.00,60.00 513.70,60.00 522.40,60.00 531.10,60.00 539.80,60.00 548.50,60.00 557.20,60.00 565.90,60.00 574.60,60.54 583.30,61.24 592.00,61.87 600.70,62.44 609.40,62.94 618.10,63.38 626.80,63.73 635.50,64.01 644.20,64.21 652.90,64.32 661.60,64.35 670.30,64.30 679.00,64.17 687.70,63.95 696.40,63.65 705.10,63.27 713.80,62.81 722.50,62.27 731.20,61.65 739.90,60.95 748.60,60.19 757.30,60.00 766.00,60.00 774.70,60.00 783.40,60.00 792.10,60.00 800.80,60.00 809.50,60.00 818.20,60.00 826.90,60.00 835.60,60.00 844.30,60.00 853.00,60.00 861.70,60.00 870.40,60.00 879.10,60.00 887.80,60.00 896.50,60.00 905.20,60.00 913.90,60.00 922.60,60.00 931.30,60.00 940.00,60.00" />
+<rect x="700" y="72" width="230" height="130" fill="#ffffff" stroke="#d9d3c7" rx="10" />
+<text x="725" y="96" font-size="15" font-weight="bold" fill="#1d1d1d">Data Schema</text>
+<text x="725" y="130" font-size="13" fill="#1d1d1d">mean: 15.0082</text>
+<text x="725" y="148" font-size="13" fill="#1d1d1d">variance: 40.7765</text>
+<text x="725" y="166" font-size="13" fill="#1d1d1d">min: 4</text>
+<text x="725" y="184" font-size="13" fill="#1d1d1d">max: 56</text>
+<text x="725" y="202" font-size="13" fill="#1d1d1d">size: 5000</text>
+<rect x="700" y="220" width="230" height="76" fill="#ffffff" stroke="#d9d3c7" rx="10" />
+<circle cx="732" cy="246" r="4" fill="#1f77b4" fill-opacity="0.75" />
+<text x="750" y="250" font-size="13" fill="#1d1d1d">Actual empirical CDF scatter</text>
+<line x1="728" y1="272" x2="768" y2="272" stroke="#d62728" stroke-width="3" />
+<text x="778" y="276" font-size="13" fill="#1d1d1d">ML approximation line</text>
+<text x="505.0" y="590" font-size="14" text-anchor="middle" fill="#1d1d1d">x value</text>
+<text x="24" y="305.0" font-size="14" text-anchor="middle" fill="#1d1d1d" transform="rotate(-90 24 305.0)">CDF</text>
+</svg>

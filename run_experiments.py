@@ -24,6 +24,7 @@ PROFILES = {
 }
 
 MODES = [
+    "lognormal",
     "low_biased",
     "high_biased",
     "wide_spread",
