@@ -17,7 +17,7 @@
 1. `config.yaml`에서 `N`, `sample_size`, `mean`, `variance` 등을 설정
 2. 설정에 따라 `0..N` 범위의 랜덤 데이터를 생성
 3. 생성된 데이터로 경험적 CDF를 계산
-4. 단조 증가와 `0..1` 출력이 보장되는 작은 회귀 모델을 학습
+4. `torch` 기반 회귀 모델을 학습
 5. 실제 CDF와 예측 CDF를 비교하고 결과를 저장
 
 ## Config 예시
@@ -46,23 +46,18 @@ learning_rate: 0.08
 | `seed` | 재현 가능한 실험용 시드 |
 | `distribution_mode` | `lognormal`, `mixed`, `low_biased`, `high_biased`, `wide_spread`, `edge_focused`, `noisy_random` |
 | `train_ratio` | CDF 포인트 학습 비율 |
-| `hidden_size` | 단조 CDF 모델의 sigmoid basis 개수 |
+| `hidden_size` | `torch` 모델의 hidden width |
 | `epochs` | 학습 반복 수 |
 | `learning_rate` | SGD 학습률 |
 
-현재 예측기는 일반 MLP가 아니라 다음 형태입니다.
+현재 예측기는 `torch` 기반 모델입니다.
 
-- 여러 개의 sigmoid basis를 사용
-- 각 basis의 가중치는 `softmax`로 정규화되어 항상 양수이고 합이 1
-- 각 basis의 기울기는 `softplus`를 통해 항상 양수
-- 따라서 전체 출력은 항상 단조 증가
-- sigmoid 가중합이므로 출력은 항상 `0..1` 범위
+- hidden layer는 `Softplus`를 사용
+- 마지막 출력은 `sigmoid` 기반으로 만들어 `0 <= y < 1` 범위를 유지
+- 입력이 항상 `0` 이상이라는 조건을 이용해 `raw_output = x * positive_scale` 구조를 사용
+- 따라서 입력이 `0`일 때 출력은 정확히 `0`
 
-파라미터 수는 `3 * hidden_size` 입니다.
-
-- basis weight raw parameter: `hidden_size`
-- slope raw parameter: `hidden_size`
-- horizontal shift parameter: `hidden_size`
+파라미터 수는 모델 width에 따라 달라지며, 실행 시 자동으로 계산해 메트릭에 기록합니다.
 
 ## 분포 모드
 
@@ -78,6 +73,16 @@ learning_rate: 0.08
 랜덤 생성이기 때문에 실제 샘플 평균과 분산은 설정값과 정확히 일치하지 않을 수 있습니다.
 
 ## 실행 방법
+
+의존성 설치:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+실행:
 
 ```bash
 python3 main.py

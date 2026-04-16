@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 import yaml
@@ -9,7 +8,7 @@ import yaml
 from cdf_builder import build_empirical_cdf
 from data_generator import generate_dataset
 from evaluator import build_plot_filename, mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
-from model import MonotonicCDFRegressor
+from model import TorchCDFRegressor, fit_model, predict_model
 
 
 def load_config(path: Path) -> dict:
@@ -40,16 +39,17 @@ def run_experiment(config: dict, output_root: Path) -> dict:
     normalized_x = normalize_x(x_values, config["N"])
 
     x_train, x_test, y_train, y_test = train_test_split(normalized_x, cdf_values, config["train_ratio"])
-    model = MonotonicCDFRegressor(
-        hidden_size=config["hidden_size"],
+    model = TorchCDFRegressor(hidden_size=config["hidden_size"], seed=config["seed"])
+    losses = fit_model(
+        model=model,
+        x_train=x_train,
+        y_train=y_train,
         learning_rate=config["learning_rate"],
         epochs=config["epochs"],
-        seed=config["seed"],
     )
-    losses = model.fit(x_train, y_train)
 
-    predicted_all = model.predict(normalized_x)
-    predicted_test = model.predict(x_test)
+    predicted_all = predict_model(model, normalized_x)
+    predicted_test = predict_model(model, x_test)
 
     metrics = {
         "config": config,
@@ -80,7 +80,7 @@ def run_experiment(config: dict, output_root: Path) -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a tiny MLP regressor.")
+    parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a torch-based regressor.")
     parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
     parser.add_argument("--output-root", default="outputs", help="directory for metrics, data, and plots")
     args = parser.parse_args()
