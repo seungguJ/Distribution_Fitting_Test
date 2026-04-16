@@ -1,0 +1,10 @@
+N: 100
+sample_size: 5000
+mean: 30
+variance: 200
+seed: 42
+distribution_mode: mixed
+train_ratio: 0.8
+hidden_size: 12
+epochs: 4000
+learning_rate: 0.08

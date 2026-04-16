@@ -1,0 +1,88 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+import yaml
+
+from cdf_builder import build_empirical_cdf
+from data_generator import generate_dataset
+from evaluator import mae, monotonic_violations, mse, r2_score, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
+from model import SimpleMLPRegressor
+
+
+def load_config(path: Path) -> dict:
+    with path.open("r", encoding="utf-8") as file:
+        config = yaml.safe_load(file)
+    if not isinstance(config, dict):
+        raise ValueError("config file must contain a mapping")
+    return config
+
+
+def normalize_x(x_values: list[int], max_value: int) -> list[float]:
+    return [value / max_value for value in x_values]
+
+
+def train_test_split(x_values: list[float], y_values: list[float], train_ratio: float) -> tuple[list[float], list[float], list[float], list[float]]:
+    split_index = max(1, min(len(x_values) - 1, int(len(x_values) * train_ratio)))
+    return (
+        x_values[:split_index],
+        x_values[split_index:],
+        y_values[:split_index],
+        y_values[split_index:],
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a tiny MLP regressor.")
+    parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
+    args = parser.parse_args()
+
+    config = load_config(Path(args.config))
+    samples = generate_dataset(config)
+    x_values, cdf_values, _counts = build_empirical_cdf(samples, config["N"])
+    normalized_x = normalize_x(x_values, config["N"])
+
+    x_train, x_test, y_train, y_test = train_test_split(normalized_x, cdf_values, config["train_ratio"])
+    model = SimpleMLPRegressor(
+        hidden_size=config["hidden_size"],
+        learning_rate=config["learning_rate"],
+        epochs=config["epochs"],
+        seed=config["seed"],
+    )
+    losses = model.fit(x_train, y_train)
+
+    predicted_all = model.predict(normalized_x)
+    predicted_test = model.predict(x_test)
+
+    metrics = {
+        "config": config,
+        "sample_summary": summarize_samples(samples),
+        "train_points": len(x_train),
+        "test_points": len(x_test),
+        "train_final_loss": losses[-1],
+        "full_mse": mse(cdf_values, predicted_all),
+        "full_mae": mae(cdf_values, predicted_all),
+        "full_r2": r2_score(cdf_values, predicted_all),
+        "test_mse": mse(y_test, predicted_test) if y_test else None,
+        "test_mae": mae(y_test, predicted_test) if y_test else None,
+        "test_r2": r2_score(y_test, predicted_test) if y_test else None,
+        "monotonic_violations": monotonic_violations(predicted_all),
+    }
+
+    output_root = Path("outputs")
+    save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
+    save_samples_csv(output_root / "data" / "latest_samples.csv", samples)
+    save_cdf_csv(output_root / "data" / "latest_cdf.csv", x_values, cdf_values, predicted_all)
+    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", x_values, cdf_values, predicted_all)
+
+    print("Run complete")
+    print(f"sample mean={metrics['sample_summary']['mean']:.4f}, sample variance={metrics['sample_summary']['variance']:.4f}")
+    print(f"full mse={metrics['full_mse']:.6f}, full mae={metrics['full_mae']:.6f}, full r2={metrics['full_r2']:.6f}")
+    print(f"test mse={metrics['test_mse']:.6f}, test mae={metrics['test_mae']:.6f}, test r2={metrics['test_r2']:.6f}")
+    print(f"monotonic violations={metrics['monotonic_violations']}")
+    print("outputs written to outputs/")
+
+
+if __name__ == "__main__":
+    main()
