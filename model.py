@@ -10,7 +10,7 @@ class TorchCDFRegressor(nn.Module):
         torch.manual_seed(seed)
         self.hidden_size = hidden_size
         self.hidden_layers = hidden_layers
-        layers: list[nn.Module] = [nn.Linear(4, hidden_size), nn.ReLU()]
+        layers: list[nn.Module] = [nn.Linear(2, hidden_size), nn.ReLU()]
         for _ in range(max(0, hidden_layers - 1)):
             layers.extend([nn.Linear(hidden_size, hidden_size), nn.ReLU()])
         self.hidden_net = nn.Sequential(*layers)
@@ -28,9 +28,7 @@ class TorchCDFRegressor(nn.Module):
     def _build_features(self, x_value: torch.Tensor) -> torch.Tensor:
         safe_x = torch.clamp(x_value, min=0.0, max=1.0)
         log_feature = torch.log1p(999.0 * safe_x) / torch.log(torch.tensor(1000.0, device=safe_x.device))
-        sqrt_feature = torch.sqrt(safe_x)
-        square_feature = safe_x * safe_x
-        return torch.cat([safe_x, sqrt_feature, square_feature, log_feature], dim=1)
+        return torch.cat([safe_x, log_feature], dim=1)
 
     def forward(self, x_value: torch.Tensor) -> torch.Tensor:
         features = self._build_features(x_value)

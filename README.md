@@ -31,8 +31,8 @@ seed: 42
 distribution_mode: lognormal
 train_ratio: 0.8
 hidden_size: 64
-epochs: 400
-learning_rate: 0.03
+epochs: 1000
+learning_rate: 0.005
 ```
 
 주요 설정:
@@ -53,10 +53,10 @@ learning_rate: 0.03
 
 현재 예측기는 `torch` 기반 모델입니다.
 
-- hidden layer는 `Softplus`를 사용
+- hidden layer는 `ReLU`를 사용
 - 마지막 출력은 `sigmoid` 기반으로 만들어 `0 <= y < 1` 범위를 유지
-- 입력이 항상 `0` 이상이라는 조건을 이용해 `raw_output = x * positive_scale` 구조를 사용
-- 따라서 입력이 `0`일 때 출력은 정확히 `0`
+- 입력은 정규화된 `x`와 `log1p` 기반 특징 2개를 사용
+- 작은 모델 실험은 `hidden_layers=1`, `hidden_size=16` 같은 방식으로 별도 저장 가능
 
 파라미터 수는 모델 width에 따라 달라지며, 실행 시 자동으로 계산해 메트릭에 기록합니다.
 
@@ -98,7 +98,7 @@ python3 main.py --distribution-mode gamma
 모델 크기만 바꿔서 별도 결과 저장:
 
 ```bash
-python3 main.py --distribution-mode gamma --hidden-layers 1 --hidden-size 32
+python3 main.py --distribution-mode gamma --hidden-layers 1 --hidden-size 16
 ```
 
 ## 출력 결과
