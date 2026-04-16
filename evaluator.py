@@ -90,6 +90,7 @@ def build_artifact_stem(config: dict) -> str:
         f"_size-{config['sample_size']}"
         f"_mean-{mean_value}"
         f"_var-{variance_value}"
+        f"_layers-{config['hidden_layers']}"
         f"_hidden-{config['hidden_size']}"
         f"_epochs-{config['epochs']}"
         f"_lr-{learning_rate_value}"

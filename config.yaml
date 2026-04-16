@@ -5,6 +5,7 @@ variance: 3000000
 seed: 42
 distribution_mode: lognormal
 train_ratio: 0.8
+hidden_layers: 3
 hidden_size: 64
 epochs: 1000
 learning_rate: 0.005

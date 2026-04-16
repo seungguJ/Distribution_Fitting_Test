@@ -46,6 +46,7 @@ learning_rate: 0.03
 | `seed` | 재현 가능한 실험용 시드 |
 | `distribution_mode` | `lognormal`, `mixed`, `low_biased`, `high_biased`, `wide_spread`, `edge_focused`, `noisy_random` |
 | `train_ratio` | CDF 포인트 학습 비율 |
+| `hidden_layers` | hidden layer 개수 |
 | `hidden_size` | `torch` 모델의 hidden width |
 | `epochs` | 학습 반복 수 |
 | `learning_rate` | SGD 학습률 |
@@ -92,6 +93,12 @@ python3 main.py
 
 ```bash
 python3 main.py --distribution-mode gamma
+```
+
+모델 크기만 바꿔서 별도 결과 저장:
+
+```bash
+python3 main.py --distribution-mode gamma --hidden-layers 1 --hidden-size 32
 ```
 
 ## 출력 결과

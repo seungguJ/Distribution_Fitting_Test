@@ -5,18 +5,15 @@ from torch import nn
 
 
 class TorchCDFRegressor(nn.Module):
-    def __init__(self, hidden_size: int, seed: int) -> None:
+    def __init__(self, hidden_size: int, hidden_layers: int, seed: int) -> None:
         super().__init__()
         torch.manual_seed(seed)
         self.hidden_size = hidden_size
-        self.hidden_net = nn.Sequential(
-            nn.Linear(4, hidden_size),
-            nn.ReLU(),
-            nn.Linear(hidden_size, hidden_size),
-            nn.ReLU(),
-            nn.Linear(hidden_size, hidden_size),
-            nn.ReLU(),
-        )
+        self.hidden_layers = hidden_layers
+        layers: list[nn.Module] = [nn.Linear(4, hidden_size), nn.ReLU()]
+        for _ in range(max(0, hidden_layers - 1)):
+            layers.extend([nn.Linear(hidden_size, hidden_size), nn.ReLU()])
+        self.hidden_net = nn.Sequential(*layers)
         self.output_layer = nn.Linear(hidden_size, 1)
         self.output_activation = nn.Sigmoid()
 

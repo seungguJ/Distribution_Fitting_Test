@@ -63,7 +63,11 @@ def run_experiment(config: dict, output_root: Path) -> dict:
         config["train_ratio"],
         config["seed"],
     )
-    model = TorchCDFRegressor(hidden_size=config["hidden_size"], seed=config["seed"])
+    model = TorchCDFRegressor(
+        hidden_size=config["hidden_size"],
+        hidden_layers=config["hidden_layers"],
+        seed=config["seed"],
+    )
     losses = fit_model(
         model=model,
         x_train=x_train,
@@ -120,11 +124,17 @@ def main() -> None:
     parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
     parser.add_argument("--output-root", default="outputs", help="directory for metrics, data, and plots")
     parser.add_argument("--distribution-mode", default=None, help="override distribution_mode from config")
+    parser.add_argument("--hidden-size", type=int, default=None, help="override hidden_size from config")
+    parser.add_argument("--hidden-layers", type=int, default=None, help="override hidden_layers from config")
     args = parser.parse_args()
 
     config = load_config(Path(args.config))
     if args.distribution_mode is not None:
         config["distribution_mode"] = args.distribution_mode
+    if args.hidden_size is not None:
+        config["hidden_size"] = args.hidden_size
+    if args.hidden_layers is not None:
+        config["hidden_layers"] = args.hidden_layers
     output_root = Path(args.output_root)
     metrics = run_experiment(config, output_root)
 
