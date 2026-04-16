@@ -14,7 +14,7 @@
 
 ## 실험 흐름
 
-1. `config.yaml`에서 `N`, `sample_size`, `mean`, `variance` 등을 설정
+1. `config.yaml` 하나에서 `N`, `sample_size`, `mean`, `variance` 등을 설정
 2. 설정에 따라 `0..N` 범위의 랜덤 데이터를 생성
 3. 생성된 데이터로 경험적 CDF를 계산
 4. `torch` 기반 회귀 모델을 학습
@@ -23,16 +23,16 @@
 ## Config 예시
 
 ```yaml
-N: 100
-sample_size: 5000
-mean: 30
-variance: 200
+N: 50000
+sample_size: 100000
+mean: 1000
+variance: 3000000
 seed: 42
-distribution_mode: mixed
+distribution_mode: lognormal
 train_ratio: 0.8
-hidden_size: 12
-epochs: 4000
-learning_rate: 0.08
+hidden_size: 64
+epochs: 400
+learning_rate: 0.03
 ```
 
 주요 설정:
@@ -88,18 +88,13 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
-다른 설정 파일을 쓰고 싶다면:
-
-```bash
-python3 main.py --config config.yaml
-```
-
 ## 출력 결과
 
 실행이 끝나면 `outputs/` 아래에 다음 파일이 생성됩니다.
 
 - `outputs/metrics/latest_metrics.json`: 오차 지표와 데이터 요약
 - `outputs/plots/latest_cdf.svg`: 실제 CDF와 예측 CDF 비교 그래프
+- `outputs/plots/cdf_mode-...svg`: 설정값이 파일명에 들어간 보관용 플롯
 - `outputs/data/latest_samples.csv`: 생성된 샘플 일부
 - `outputs/data/latest_cdf.csv`: 실제/예측 CDF 값
 
@@ -121,5 +116,6 @@ Distribution_Fitting_Test/
 ├─ cdf_builder.py
 ├─ model.py
 ├─ evaluator.py
+├─ requirements.txt
 └─ outputs/
 ```
