@@ -33,6 +33,29 @@ def _lognormal(rng: random.Random, cfg: GeneratorConfig) -> int:
     return _clip_int(raw_value, cfg.N)
 
 
+def _gamma(rng: random.Random, cfg: GeneratorConfig) -> int:
+    bounded_mean = min(max(cfg.mean, 1.0), cfg.N)
+    bounded_variance = max(cfg.variance, 1.0)
+    shape = max((bounded_mean * bounded_mean) / bounded_variance, 1e-6)
+    scale = bounded_variance / bounded_mean
+    return _clip_int(rng.gammavariate(shape, scale), cfg.N)
+
+
+def _chi2(rng: random.Random, cfg: GeneratorConfig) -> int:
+    bounded_mean = min(max(cfg.mean, 1.0), cfg.N)
+    bounded_variance = max(cfg.variance, 1.0)
+    dof = max((2.0 * bounded_mean * bounded_mean) / bounded_variance, 1e-6)
+    scale = bounded_variance / (2.0 * bounded_mean)
+    raw_value = scale * rng.gammavariate(dof / 2.0, 2.0)
+    return _clip_int(raw_value, cfg.N)
+
+
+def _exponential(rng: random.Random, cfg: GeneratorConfig) -> int:
+    bounded_mean = min(max(cfg.mean, 1.0), cfg.N)
+    raw_value = rng.expovariate(1.0 / bounded_mean)
+    return _clip_int(raw_value, cfg.N)
+
+
 def _low_biased(rng: random.Random, cfg: GeneratorConfig) -> int:
     alpha = max(1.2, (cfg.mean + 1) / max(cfg.N - cfg.mean, 1))
     beta = max(2.0, cfg.N / max(cfg.mean + 1, 1))
@@ -78,6 +101,9 @@ def _outlier_high_median(_rng: random.Random, cfg: GeneratorConfig) -> int:
 
 MODE_TO_GENERATOR = {
     "lognormal": _lognormal,
+    "gamma": _gamma,
+    "chi2": _chi2,
+    "exponential": _exponential,
     "low_biased": _low_biased,
     "high_biased": _high_biased,
     "wide_spread": _wide_spread,

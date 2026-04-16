@@ -80,20 +80,24 @@ def save_cdf_csv(path: Path, x_values: list[int], cdf_values: list[float], predi
             writer.writerow([x_value, actual, predicted])
 
 
-def build_plot_filename(config: dict, sample_summary: dict) -> str:
+def build_artifact_stem(config: dict) -> str:
     mean_value = f"{config['mean']:.2f}".replace(".", "p")
     variance_value = f"{config['variance']:.2f}".replace(".", "p")
     learning_rate_value = f"{config['learning_rate']:.4f}".replace(".", "p")
     return (
-        f"cdf_mode-{config['distribution_mode']}"
+        f"mode-{config['distribution_mode']}"
         f"_N-{config['N']}"
         f"_size-{config['sample_size']}"
         f"_mean-{mean_value}"
         f"_var-{variance_value}"
         f"_hidden-{config['hidden_size']}"
         f"_epochs-{config['epochs']}"
-        f"_lr-{learning_rate_value}.svg"
+        f"_lr-{learning_rate_value}"
     )
+
+
+def build_plot_filename(config: dict, sample_summary: dict) -> str:
+    return f"cdf_{build_artifact_stem(config)}.svg"
 
 
 def save_cdf_plot(path: Path, x_values: list[int], actual: list[float], predicted: list[float], sample_summary: dict) -> None:

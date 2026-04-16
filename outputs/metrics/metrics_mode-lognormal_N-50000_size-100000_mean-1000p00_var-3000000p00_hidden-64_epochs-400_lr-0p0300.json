@@ -33,5 +33,8 @@
   "test_mae": 3.16996326681252e-05,
   "test_r2": -3.078169732190829,
   "monotonic_violations": 0,
+  "named_metrics_path": "outputs/metrics/metrics_mode-lognormal_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.json",
+  "named_samples_path": "outputs/data/samples_mode-lognormal_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.csv",
+  "named_cdf_path": "outputs/data/cdf_mode-lognormal_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.csv",
   "named_plot_path": "outputs/plots/cdf_mode-lognormal_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.svg"
 }

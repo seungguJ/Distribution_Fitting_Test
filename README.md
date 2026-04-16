@@ -88,15 +88,20 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
+특정 분포만 바꿔 테스트:
+
+```bash
+python3 main.py --distribution-mode gamma
+```
+
 ## 출력 결과
 
-실행이 끝나면 `outputs/` 아래에 다음 파일이 생성됩니다.
+실행이 끝나면 `outputs/` 아래에 설정값이 들어간 이름으로 파일이 생성됩니다.
 
-- `outputs/metrics/latest_metrics.json`: 오차 지표와 데이터 요약
-- `outputs/plots/latest_cdf.svg`: 실제 CDF와 예측 CDF 비교 그래프
-- `outputs/plots/cdf_mode-...svg`: 설정값이 파일명에 들어간 보관용 플롯
-- `outputs/data/latest_samples.csv`: 생성된 샘플 일부
-- `outputs/data/latest_cdf.csv`: 실제/예측 CDF 값
+- `outputs/metrics/metrics_mode-...json`: 오차 지표와 데이터 요약
+- `outputs/plots/cdf_mode-...svg`: 실제 CDF와 예측 CDF 비교 그래프
+- `outputs/data/samples_mode-...csv`: 생성된 샘플
+- `outputs/data/cdf_mode-...csv`: 실제/예측 CDF 값
 
 ## 평가 지표
 

@@ -7,7 +7,7 @@ import yaml
 
 from cdf_builder import build_empirical_cdf
 from data_generator import generate_dataset
-from evaluator import build_plot_filename, mae, monotonic_violations, mse, r2_score, rmse, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
+from evaluator import build_artifact_stem, build_plot_filename, mae, monotonic_violations, mse, r2_score, rmse, save_cdf_csv, save_cdf_plot, save_metrics, save_samples_csv, summarize_samples
 from model import TorchCDFRegressor, fit_model, predict_model
 
 
@@ -74,14 +74,20 @@ def run_experiment(config: dict, output_root: Path) -> dict:
     plot_x_values = x_values[: plot_limit + 1]
     plot_actual = cdf_values[: plot_limit + 1]
     plot_predicted = predicted_all[: plot_limit + 1]
+    artifact_stem = build_artifact_stem(config)
+    named_metrics_path = output_root / "metrics" / f"metrics_{artifact_stem}.json"
+    named_samples_path = output_root / "data" / f"samples_{artifact_stem}.csv"
+    named_cdf_path = output_root / "data" / f"cdf_{artifact_stem}.csv"
     named_plot_path = output_root / "plots" / build_plot_filename(config, metrics["sample_summary"])
-    save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
-    save_samples_csv(output_root / "data" / "latest_samples.csv", samples)
-    save_cdf_csv(output_root / "data" / "latest_cdf.csv", x_values, cdf_values, predicted_all)
-    save_cdf_plot(output_root / "plots" / "latest_cdf.svg", plot_x_values, plot_actual, plot_predicted, metrics["sample_summary"])
+    save_metrics(named_metrics_path, metrics)
+    save_samples_csv(named_samples_path, samples)
+    save_cdf_csv(named_cdf_path, x_values, cdf_values, predicted_all)
     save_cdf_plot(named_plot_path, plot_x_values, plot_actual, plot_predicted, metrics["sample_summary"])
+    metrics["named_metrics_path"] = str(named_metrics_path)
+    metrics["named_samples_path"] = str(named_samples_path)
+    metrics["named_cdf_path"] = str(named_cdf_path)
     metrics["named_plot_path"] = str(named_plot_path)
-    save_metrics(output_root / "metrics" / "latest_metrics.json", metrics)
+    save_metrics(named_metrics_path, metrics)
     return metrics
 
 
@@ -89,9 +95,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Approximate an empirical CDF with a torch-based regressor.")
     parser.add_argument("--config", default="config.yaml", help="path to a YAML config file")
     parser.add_argument("--output-root", default="outputs", help="directory for metrics, data, and plots")
+    parser.add_argument("--distribution-mode", default=None, help="override distribution_mode from config")
     args = parser.parse_args()
 
     config = load_config(Path(args.config))
+    if args.distribution_mode is not None:
+        config["distribution_mode"] = args.distribution_mode
     output_root = Path(args.output_root)
     metrics = run_experiment(config, output_root)
 

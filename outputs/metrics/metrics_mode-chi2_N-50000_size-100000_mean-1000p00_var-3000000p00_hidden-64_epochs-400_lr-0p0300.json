@@ -1,0 +1,40 @@
+{
+  "config": {
+    "N": 50000,
+    "sample_size": 100000,
+    "mean": 1000,
+    "variance": 3000000,
+    "seed": 42,
+    "distribution_mode": "chi2",
+    "train_ratio": 0.8,
+    "hidden_size": 64,
+    "epochs": 400,
+    "learning_rate": 0.03
+  },
+  "model_name": "TorchCDFRegressor",
+  "model_parameter_count": 4353,
+  "sample_summary": {
+    "size": 100000,
+    "min": 0,
+    "max": 35499,
+    "mean": 1004.38673,
+    "median": 287.0,
+    "variance": 3058980.8342699073
+  },
+  "train_points": 40000,
+  "test_points": 10001,
+  "train_final_loss": 0.0014509324682876468,
+  "full_mse": 0.0011607082935173579,
+  "full_rmse": 0.034069169251940354,
+  "full_mae": 0.011107825344060745,
+  "full_r2": 0.7824834372249057,
+  "test_mse": 1.4210854715202004e-14,
+  "test_rmse": 1.1920928955078125e-07,
+  "test_mae": 1.1920928955078125e-07,
+  "test_r2": 1.0,
+  "monotonic_violations": 0,
+  "named_metrics_path": "outputs/metrics/metrics_mode-chi2_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.json",
+  "named_samples_path": "outputs/data/samples_mode-chi2_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.csv",
+  "named_cdf_path": "outputs/data/cdf_mode-chi2_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.csv",
+  "named_plot_path": "outputs/plots/cdf_mode-chi2_N-50000_size-100000_mean-1000p00_var-3000000p00_hidden-64_epochs-400_lr-0p0300.svg"
+}
